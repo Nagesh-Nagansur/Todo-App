@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+</br>
+{{ message }}
+<br>
+<form class="signup" action="signup" method="post">
+{% csrf_token %}
+{{ form }}
+
+
+<input type="submit" name="signup" value="Register">
+</form>
+{% endblock %}

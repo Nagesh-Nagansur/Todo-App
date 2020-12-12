@@ -1,0 +1,17 @@
+{% extends "base.html "%}
+
+{% block content %}
+
+</br>
+</br>
+{% csrf_token %}
+{{ message }}
+<form class="loginuser" action={% url "loginuser" %} method="POST">
+{% csrf_token %}
+{{ form }}
+
+<input type="submit" name="loginuser" value="Login">
+</form>
+
+
+{% endblock %}
