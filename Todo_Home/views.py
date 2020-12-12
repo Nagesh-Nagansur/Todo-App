@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm ,AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import login,logout,authenticate
+from .models import Todos
 # Create your views here.
 def Home(request):
     tasks=Task.objects.all().order_by('date')
