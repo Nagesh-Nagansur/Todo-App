@@ -10,8 +10,8 @@ This is current todo and user name is {{ user.username }}
 
 <ul>
   {% for t in todo %}
-
-  <li>{{ t.title }}</li>
+<p>  <li>{% if t.important %} <b>{% endif %} <a href={% url "viewtodo" t.id %}>{{ t.title}}</a> </b> {% if t.memo %} - {{ t.memo }} {% endif %} </li>
+  </p>
 
   {% endfor %}
 

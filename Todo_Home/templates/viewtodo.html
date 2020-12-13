@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+<p>  <h1>{{ todo.title }}</h1></p>
+<hr>
+  {{ todo.memo }}
+<br>
+<form method="POST">
+  {% csrf_token %}
+ {{ form.as_p }}
+ <button type="submit" name="button">Update</button>
+</form>
+
+  </body>
+</html>

@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse,redirect
+from django.shortcuts import render,HttpResponse,redirect,get_object_or_404
 from django.contrib.auth.forms import UserCreationForm ,AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
@@ -70,6 +70,19 @@ def createtodo(request):
         return redirect('currenttodo')
 
 def currenttodo(request):
-
-    todos = Todos.objects.filter(user=request.user)
+    todos = Todos.objects.filter(user=request.user,datecompleted__isnull=True)    #no completed todos
     return render(request,'currenttodo.html',{'todo':todos})
+
+def viewtodo(request,pk_id):
+    todo = get_object_or_404(Todos,pk=pk_id,user=request.user)   #this is instance of Todos model
+    if  request.method == "GET":
+        form = TodoForm(instance=todo)                   #we are sending instance to form so it fills th data
+        return render(request,'viewtodo.html',{'todo':todo,'form':form})
+    else:
+        form=TodoForm(request.POST,instance=todo)
+        form.save()
+        return redirect('currenttodo')
+# def completetodo(request,pk_id):
+#         # todo = get_object_or_404(Todos,pk=pk_id,user=request.user)
+#         # if request.method == "POST":
+#     pass

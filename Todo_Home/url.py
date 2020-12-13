@@ -10,4 +10,6 @@ urlpatterns = [
     path('logoutuser',views.logoutuser,name="logoutuser"),
     path('signup',views.register,name="signup"),
     path('currenttodo',views.currenttodo,name="currenttodo"),
+    path('currenttodo/<int:pk_id>',views.viewtodo,name="viewtodo"),
+    # path('currenttodo/<int:pk_id>/completetodo',views.completetodo,name="completetodo"),
 ]
