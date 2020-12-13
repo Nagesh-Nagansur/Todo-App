@@ -3,6 +3,19 @@
 
 {% block content %}
 </br>
+<a href="{% url "createtodo" %}">CreateTodo</a>
+<br>
+<br>
 This is current todo and user name is {{ user.username }}
+
+<ul>
+  {% for t in todo %}
+
+  <li>{{ t.title }}</li>
+
+  {% endfor %}
+
+</ul>
+
 
 {% endblock %}

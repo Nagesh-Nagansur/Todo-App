@@ -20,5 +20,4 @@ from Todo_Home import url
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include(url)),        #this will send to Todo_Home -> url.py
-
 ]
