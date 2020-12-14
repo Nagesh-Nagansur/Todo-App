@@ -14,5 +14,6 @@ urlpatterns = [
     path('currenttodo/<int:pk_id>/complete',views.completetodo,name="completetodo"),
     path('currenttodo/<int:pk_id>/delete',views.deletetodo,name="deletetodo"),
     path('completedtodo',views.completedtodo,name='completedtodo'),
+    path('clearall',views.clearall,name="clearall"),
 
 ]

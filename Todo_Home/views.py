@@ -103,3 +103,8 @@ def completedtodo(request):
 
 # instance = SomeModel.objects.get(id=id)
 # instance.delete()
+def clearall(request):
+    todo = Todos.objects.filter(user=request.user,datecompleted__isnull=False)
+    if request.method == "POST":
+        todo.delete()
+        return redirect('completedtodo')
