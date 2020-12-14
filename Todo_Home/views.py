@@ -89,18 +89,17 @@ def completetodo(request,pk_id):
         todo.datecompleted=timezone.now()
         todo.save()
         return redirect('currenttodo')
-        
+
 def deletetodo(request,pk_id):
     # todo = get_object_or_404(Todos,id=pk_id,user=request.user)
     todo=Todos.objects.get(id=pk_id,user=request.user)
     if request.method == "POST":
         todo.delete()
         return redirect('currenttodo')
-# def completedtodo(request):
-#     todos = Todos.objects.filter(user=request.user,datecompleted=True)
-#     if request.method == "POST":
-#         return render(request,'completedtodo.html',{'todo':todos })
 
+def completedtodo(request):
+    todos = Todos.objects.filter(user=request.user,datecompleted__isnull=False) #important__isnull=False    #no completed todos it wont show those which are datecompleted is true
+    return render(request,'completedtodo.html',{'todo': todos})
 
 # instance = SomeModel.objects.get(id=id)
 # instance.delete()

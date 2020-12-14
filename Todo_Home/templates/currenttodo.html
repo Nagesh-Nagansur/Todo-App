@@ -2,6 +2,10 @@
 
 
 {% block content %}
+<form action={% url "completedtodo" %} method="post">
+  {% csrf_token %}
+  <button type="submit">Completed Todos</button>
+</form>
 </br>
 <a href="{% url "createtodo" %}">CreateTodo</a>
 <br>
