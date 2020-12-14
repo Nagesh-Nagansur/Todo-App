@@ -6,6 +6,7 @@ from django.contrib.auth import login,logout,authenticate
 from .forms import TodoForm
 from django.forms import  modelformset_factory
 from .models import Todos
+from django.utils import timezone
 # Create your views here.
 def Home(request):
     return render(request,'Home.html')
@@ -70,7 +71,7 @@ def createtodo(request):
         return redirect('currenttodo')
 
 def currenttodo(request):
-    todos = Todos.objects.filter(user=request.user,datecompleted__isnull=True)    #no completed todos
+    todos = Todos.objects.filter(user=request.user,datecompleted__isnull=True) #important__isnull=False    #no completed todos it wont show those which are datecompleted is true
     return render(request,'currenttodo.html',{'todo':todos})
 
 def viewtodo(request,pk_id):
@@ -82,7 +83,24 @@ def viewtodo(request,pk_id):
         form=TodoForm(request.POST,instance=todo)
         form.save()
         return redirect('currenttodo')
-# def completetodo(request,pk_id):
-#         # todo = get_object_or_404(Todos,pk=pk_id,user=request.user)
-#         # if request.method == "POST":
-#     pass
+def completetodo(request,pk_id):
+    todo = get_object_or_404(Todos,pk=pk_id,user=request.user)
+    if request.method=="POST":
+        todo.datecompleted=timezone.now()
+        todo.save()
+        return redirect('currenttodo')
+        
+def deletetodo(request,pk_id):
+    # todo = get_object_or_404(Todos,id=pk_id,user=request.user)
+    todo=Todos.objects.get(id=pk_id,user=request.user)
+    if request.method == "POST":
+        todo.delete()
+        return redirect('currenttodo')
+# def completedtodo(request):
+#     todos = Todos.objects.filter(user=request.user,datecompleted=True)
+#     if request.method == "POST":
+#         return render(request,'completedtodo.html',{'todo':todos })
+
+
+# instance = SomeModel.objects.get(id=id)
+# instance.delete()
