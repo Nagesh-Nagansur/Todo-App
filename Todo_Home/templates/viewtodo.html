@@ -1,19 +1,14 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
+{% extends "base.html" %}
+
+{% block content %}
 <p>  <h1>{{ todo.title }}</h1></p>
-<hr>
+
   {{ todo.memo }}
 <br>
 <form method="POST">
   {% csrf_token %}
  {{ form.as_p }}
 <button type="submit" name="button">Update</button>
-
 </form>
 
 <form action={% url "completetodo" todo.id %} method="POST">
@@ -25,9 +20,4 @@
 {% csrf_token %}
 <button type="submit" name="Complete">Delete</button>
 </form>
-
-
-
-
-  </body>
-</html>
+{% endblock %}

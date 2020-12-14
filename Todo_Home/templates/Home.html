@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-Home
+
+<button type="button" name="button"><a href={% url "Home" %}>Home</a></button>
+<button type="button" name="button"><a href={% url "currenttodo" %}>currenttodo</a></button>
+<button type="button" name="button"><a href={% url "loginuser" %}>Login</a></button>
+<button type="button" name="button"><a href={% url "createtodo" %}>createtodo</a></button>
+
 {% endblock %}
